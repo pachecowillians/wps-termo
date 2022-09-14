@@ -6,6 +6,9 @@ import styles from '../styles/Home.module.css'
 var letters = "QWERTYUIOPASDFGHJKLZXCVBNM";
 var lettersArray = letters.split('');
 
+lettersArray.splice(lettersArray.findIndex(letter => letter == 'L') + 1, 0, 'backspace');
+lettersArray.splice(lettersArray.findIndex(letter => letter == 'M') + 1, 0, 'enter');
+
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
@@ -15,21 +18,7 @@ const Home: NextPage = () => {
         </header>
         <main className={styles.main}></main>
         <footer className={styles.footer}>
-          {lettersArray.map(letter => {
-            if (letter == 'L') {
-              return <Fragment>
-                <KeyboardLetter letter={letter} />
-                <KeyboardLetter letter={'backspace'} />
-              </Fragment>
-            } else if (letter == 'M') {
-              return <Fragment>
-                <KeyboardLetter letter={letter} />
-                <KeyboardLetter letter={'enter'} />
-              </Fragment>
-            } else {
-              return <KeyboardLetter letter={letter} />
-            }
-          })}
+          {lettersArray.map((letter, key) => <KeyboardLetter key={key} letter={letter} />)}
         </footer>
       </div>
     </div>
