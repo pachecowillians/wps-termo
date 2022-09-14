@@ -13,6 +13,7 @@ class MyDocument extends Document {
                 <Head>
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
                     <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@600&display=swap" rel="stylesheet" />
+                    <title>WPS - Termo</title>
                 </Head>
                 <body>
                     <Main />
