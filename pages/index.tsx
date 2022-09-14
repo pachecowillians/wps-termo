@@ -8,6 +8,8 @@ const Home: NextPage = () => {
         <header className={styles.header}>
           <span>WPS - TERMO</span>
         </header>
+        <main className={styles.main}></main>
+        <footer className={styles.footer}></footer>
       </div>
     </div>
   )
