@@ -10,6 +10,7 @@
     color: #FAFAFF;
     line-height: 1rem;
     aspect-ratio: 1;
+    cursor: pointer;
 }
 
 .disabled {

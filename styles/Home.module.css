@@ -20,6 +20,10 @@
     justify-content: center;
 }
 
+.header span{
+    cursor: pointer;
+}
+
 .header span:nth-child(2) {
     position: absolute;
     right: 1rem;
