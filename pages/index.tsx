@@ -61,7 +61,7 @@ const Home: NextPage = () => {
                 <main className={styles.main}>
                     <div className={styles.mainContainer}>
                         {
-                            matrix.map(line => line.map(cell => <MainLetter letter={cell.letter} status={cell.status} />))
+                            matrix.map(line => line.map((cell, key) => <MainLetter key={key} letter={cell.letter} status={cell.status} />))
                         }
                     </div>
                 </main>
