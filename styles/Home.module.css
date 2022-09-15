@@ -48,7 +48,7 @@
 }
 
 .mainContainer {
-    width: min(min(70%, 20rem), 350px);
+    width: min(45vh, 70vw);
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(6, 1fr);
