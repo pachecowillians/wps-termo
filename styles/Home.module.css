@@ -28,9 +28,10 @@
 }
 
 .footer {
-    width: 100%;
+    width: min(100%, 700px);
     height: 37%;
     display: grid;
+    align-self: center;
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(32, 1fr);
     grid-gap: 0.16rem;
@@ -47,8 +48,7 @@
 }
 
 .mainContainer {
-    width: 75%;
-    height: 60%;
+    width: min(min(70%, 20rem), 350px);
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(6, 1fr);

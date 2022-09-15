@@ -16,12 +16,14 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
+@media screen and (min-width: 400px) {
   html {
-    color-scheme: dark;
+    font-size: 20px;
   }
-  body {
-    color: white;
-    background: black;
+}
+
+@media screen and (min-width: 800px) {
+  html {
+    font-size: 25px;
   }
 }
