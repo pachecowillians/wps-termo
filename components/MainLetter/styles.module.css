@@ -5,10 +5,11 @@
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
-    font-size: 1.5rem;
+    font-size: 1.9rem;
     font-weight: 600;
     color: #FAFAFF;
     line-height: 1rem;
+    aspect-ratio: 1;
 }
 
 .disabled {
