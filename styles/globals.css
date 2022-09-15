@@ -22,8 +22,8 @@ a {
   }
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 1200px) {
   html {
-    font-size: 25px;
+    font-size: 23px;
   }
 }
