@@ -15,3 +15,22 @@
     background-color: #615458;
     border: none;
 }
+
+.selected {
+    border-bottom: 0.25rem solid #4C4347;
+}
+
+.correct {
+    background-color: #3aa394;
+    border: none;
+}
+
+.wrongPosition {
+    background-color: #d3ad69;
+    border: none;
+}
+
+.wrong {
+    background-color: #312a2c;
+    border: none;
+}

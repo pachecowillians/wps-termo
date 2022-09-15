@@ -12,13 +12,13 @@ lettersArray.splice(lettersArray.findIndex(letter => letter == 'M') + 1, 0, 'ent
 
 interface matrixCell {
     letter: string;
-    status: 'active' | 'inactive' | 'correct' | 'wrongPosition' | 'wrong';
+    status: 'active' | 'inactive' | 'selected' | 'correct' | 'wrongPosition' | 'wrong';
 }
 
 var matrix: matrixCell[][] = [];
 
 var activeLine = 0;
-var activeColumn = -1;
+var activeColumn = 1;
 
 for (var i = 0; i < 6; i++) {
     matrix[i] = [];
@@ -27,10 +27,11 @@ for (var i = 0; i < 6; i++) {
     }
 }
 
-
-matrix[0][0] = { letter: 'E', status: 'inactive' }
-
-console.log(matrix)
+matrix[0][0] = { letter: 'A', status: 'active' }
+matrix[0][1] = { letter: 'U', status: 'selected' }
+matrix[0][2] = { letter: 'R', status: 'correct' }
+matrix[0][3] = { letter: 'E', status: 'wrongPosition' }
+matrix[0][4] = { letter: 'O', status: 'wrong' }
 
 const Home: NextPage = () => {
     return (
