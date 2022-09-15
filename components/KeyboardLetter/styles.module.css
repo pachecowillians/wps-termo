@@ -24,7 +24,20 @@
     grid-column: 30 / span 3;
 }
 
-.enter{
+.enter {
     grid-column: 25 / span 8;
     font-size: 0.6rem;
+}
+
+.correct {
+    background-color: #3aa394;
+}
+
+.wrongPosition {
+    background-color: #d3ad69;
+}
+
+.wrong {
+    background-color: #594B4F;
+    color: #6E5C62;
 }

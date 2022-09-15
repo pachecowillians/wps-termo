@@ -10,12 +10,16 @@ var lettersArray = letters.split('');
 lettersArray.splice(lettersArray.findIndex(letter => letter == 'L') + 1, 0, 'backspace');
 lettersArray.splice(lettersArray.findIndex(letter => letter == 'M') + 1, 0, 'enter');
 
-interface matrixCell {
+interface matrixCellType {
     letter: string;
     status: 'active' | 'inactive' | 'selected' | 'correct' | 'wrongPosition' | 'wrong';
 }
 
-var matrix: matrixCell[][] = [];
+interface keyboardLetterType {
+    [key: string]: 'active' | 'correct' | 'wrongPosition' | 'wrong';
+}
+
+var matrix: matrixCellType[][] = [];
 
 var activeLine = 0;
 var activeColumn = 1;
@@ -32,6 +36,17 @@ matrix[0][1] = { letter: 'U', status: 'selected' }
 matrix[0][2] = { letter: 'R', status: 'correct' }
 matrix[0][3] = { letter: 'E', status: 'wrongPosition' }
 matrix[0][4] = { letter: 'O', status: 'wrong' }
+
+var lettersStatus: keyboardLetterType = {}
+
+for (let i = 'A'.charCodeAt(0); i <= 'Z'.charCodeAt(0); i++) {
+    var letter = String.fromCharCode(i);
+    lettersStatus[letter] = 'active';
+}
+
+lettersStatus['R'] = 'correct';
+lettersStatus['E'] = 'wrongPosition';
+lettersStatus['O'] = 'wrong';
 
 const Home: NextPage = () => {
     return (
@@ -51,7 +66,7 @@ const Home: NextPage = () => {
                     </div>
                 </main>
                 <footer className={styles.footer}>
-                    {lettersArray.map((letter, key) => <KeyboardLetter key={key} letter={letter} />)}
+                    {lettersArray.map((letter, key) => <KeyboardLetter key={key} letter={letter} status={lettersStatus[letter]} />)}
                 </footer>
             </div>
         </div>
