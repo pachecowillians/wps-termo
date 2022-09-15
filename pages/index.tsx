@@ -38,7 +38,10 @@ const Home: NextPage = () => {
         <div className={styles.container}>
             <div className={styles.gameArea}>
                 <header className={styles.header}>
-                    <span>WPS - TERMO</span>
+                    <span>WPS TERMO</span>
+                    <span className="material-symbols-outlined">
+                        info
+                    </span>
                 </header>
                 <main className={styles.main}>
                     <div className={styles.mainContainer}>
