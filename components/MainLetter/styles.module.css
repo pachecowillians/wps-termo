@@ -1,6 +1,6 @@
 .container {
     border-radius: 5px;
-    border: 0.15rem solid #4C4347;
+    border: 0.2rem solid #4C4347;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,7 +19,7 @@
 }
 
 .selected {
-    border-bottom: 0.25rem solid #4C4347;
+    border-bottom: 0.4rem solid #4C4347;
 }
 
 .correct {
