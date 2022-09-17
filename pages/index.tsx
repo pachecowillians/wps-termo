@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import { Fragment } from 'react';
 import KeyboardLetter from '../components/KeyboardLetter/KeyboardLetter'
 import MainLetter from '../components/MainLetter/MainLetter';
+import Modal from '../components/Modal/MainLetter';
 import styles from '../styles/Home.module.css'
 
 var letters = "QWERTYUIOPASDFGHJKLZXCVBNM";
@@ -50,26 +51,29 @@ lettersStatus['O'] = 'wrong';
 
 const Home: NextPage = () => {
     return (
-        <div className={styles.container}>
-            <div className={styles.gameArea}>
-                <header className={styles.header}>
-                    <span>WPS TERMO</span>
-                    <span className="material-symbols-outlined">
-                        info
-                    </span>
-                </header>
-                <main className={styles.main}>
-                    <div className={styles.mainContainer}>
-                        {
-                            matrix.map(line => line.map((cell, key) => <MainLetter key={key} letter={cell.letter} status={cell.status} />))
-                        }
-                    </div>
-                </main>
-                <footer className={styles.footer}>
-                    {lettersArray.map((letter, key) => <KeyboardLetter key={key} letter={letter} status={lettersStatus[letter]} />)}
-                </footer>
+        <>
+            <Modal />
+            <div className={styles.container}>
+                <div className={styles.gameArea}>
+                    <header className={styles.header}>
+                        <span>WPS TERMO</span>
+                        <span className="material-symbols-outlined">
+                            info
+                        </span>
+                    </header>
+                    <main className={styles.main}>
+                        <div className={styles.mainContainer}>
+                            {
+                                matrix.map(line => line.map((cell, key) => <MainLetter key={key} letter={cell.letter} status={cell.status} />))
+                            }
+                        </div>
+                    </main>
+                    <footer className={styles.footer}>
+                        {lettersArray.map((letter, key) => <KeyboardLetter key={key} letter={letter} status={lettersStatus[letter]} />)}
+                    </footer>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
