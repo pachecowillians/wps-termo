@@ -93,7 +93,7 @@ const Home: NextPage = () => {
 
                                 </div>
                                 <div className={styles.modalFooter}>
-                                    <span>&copy; 2022 - Willian Pacheco Silva</span>
+                                    <span>&copy; {new Date().getFullYear()} - Willian Pacheco Silva</span>
                                 </div>
                             </>
 
