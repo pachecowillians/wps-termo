@@ -75,21 +75,27 @@ const Home: NextPage = () => {
                                 {lettersArray.map((letter, key) => <KeyboardLetter key={key} letter={letter} status={lettersStatus[letter]} />)}
                             </footer>
                         </>
-                            : <div className={styles.modalContainer}>
-                                <span> This game is a clone of the Termo game available on term.ooo. In the game, your goal is find the correct word, and you have 6 chances to do it. In each try, will be shown the letters that exists in the word and the correct letters using the colors below.</span>
-                                <div className={styles.colors}>
-                                    <div className={`${styles.color} ${styles.correct}`}>Correct</div>
-                                    <div className={`${styles.color} ${styles.wrongPosition}`}>Wrong position</div>
-                                    <div className={`${styles.color} ${styles.wrong}`}>Wrong</div>
+                            : <>
+                                <div className={styles.modalContainer}>
+                                    <span> This game is a clone of the Termo game available on term.ooo. In the game, your goal is find the correct word, and you have 6 chances to do it. In each try, will be shown the letters that exists in the word and the correct letters using the colors below.</span>
+                                    <div className={styles.colors}>
+                                        <div className={`${styles.color} ${styles.correct}`}>Correct</div>
+                                        <div className={`${styles.color} ${styles.wrongPosition}`}>Wrong position</div>
+                                        <div className={`${styles.color} ${styles.wrong}`}>Wrong</div>
+                                    </div>
+                                    <div className={styles.contacts}>
+                                        <span>Contact me:</span>
+                                        <a href='https://www.linkedin.com/in/pachecowillians' target='_blank'><img src="linkedin.svg" alt="LinkedIn" /> linkedin.com/in/pachecowillians</a>
+                                        <a href='https://github.com/pachecowillians' target='_blank'><img src="github.svg" alt="GitHub" /> github.com/pachecowillians</a>
+                                        <a href='mailto:willianpacheco31@gmail.com' target='_blank'><img src="gmail.svg" alt="Gmail" /> willianpacheco31@gmail.com</a>
+                                        <a href='https://pachecowillians.github.io' target='_blank'><img src="portfolio.svg" alt="Portfolio" /> pachecowillians.github.io</a>
+                                    </div>
+
                                 </div>
-                                <div className={styles.contacts}>
-                                    <span>Contact me:</span>
-                                    <a href='https://www.linkedin.com/in/pachecowillians' target='_blank'><img src="linkedin.svg" alt="LinkedIn" /> linkedin.com/in/pachecowillians</a>
-                                    <a href='https://github.com/pachecowillians' target='_blank'><img src="github.svg" alt="GitHub" /> github.com/pachecowillians</a>
-                                    <a href='mailto:willianpacheco31@gmail.com' target='_blank'><img src="gmail.svg" alt="Gmail" /> willianpacheco31@gmail.com</a>
-                                    <a href='https://pachecowillians.github.io' target='_blank'><img src="portfolio.svg" alt="Portfolio" /> pachecowillians.github.io</a>
+                                <div className={styles.modalFooter}>
+                                    <span>&copy; 2022 - Willian Pacheco Silva</span>
                                 </div>
-                            </div>
+                            </>
 
                     }
                 </div>

@@ -73,6 +73,7 @@
     padding: 0 1rem;
     color: #FAFAFF;
     align-content: center;
+    height: 100%;
 }
 
 .modalContainer * {
@@ -149,17 +150,33 @@
     cursor: pointer;
 }
 
+.modalFooter {
+    height: min(100%, 2rem);
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-self: flex-end;
+    color: #FAFAFF;
+}
+
+.modalFooter * {
+    user-select: text;
+}
 
 @media screen and (min-width: 400px) {
     .contacts img {
         width: 1.5rem;
     }
+
     .color::before {
         width: 1.5rem;
         font-size: 1rem;
         line-height: 1.5rem;
         aspect-ratio: 1;
     }
+
     .modalContainer {
         padding: 0 1.5rem;
     }
