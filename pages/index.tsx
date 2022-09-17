@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import { useState } from 'react';
 import KeyboardLetter from '../components/KeyboardLetter/KeyboardLetter'
 import MainLetter from '../components/MainLetter/MainLetter';
 import Modal from '../components/Modal/Modal';
@@ -49,14 +50,17 @@ lettersStatus['E'] = 'wrongPosition';
 lettersStatus['O'] = 'wrong';
 
 const Home: NextPage = () => {
+
+    const [opennedModal, setOpennedModal] = useState(false);
+
     return (
         <>
-            <Modal />
+            {opennedModal && <Modal setOpennedModal={setOpennedModal} />}
             <div className={styles.container}>
                 <div className={styles.gameArea}>
                     <header className={styles.header}>
                         <span>WPS TERMO</span>
-                        <span className="material-symbols-outlined">
+                        <span className="material-symbols-outlined" onClick={() => { setOpennedModal(true) }}>
                             info
                         </span>
                     </header>

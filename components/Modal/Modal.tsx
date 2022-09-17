@@ -1,9 +1,14 @@
+import { Dispatch, SetStateAction } from "react";
 import styles from "./styles.module.css"
 
-export default function Modal() {
+interface modalProps {
+    setOpennedModal: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function Modal({ setOpennedModal }: modalProps) {
     return <div className={styles.container}>
         <div className={styles.header}>
-            <span className="material-symbols-outlined">
+            <span className="material-symbols-outlined" onClick={() => { setOpennedModal(false) }}>
                 close
             </span>
         </div>
