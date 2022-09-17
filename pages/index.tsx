@@ -82,10 +82,10 @@ const Home: NextPage = () => {
                                 <div className={`${styles.color} ${styles.wrong}`}>Wrong</div>
                                 <div className={styles.contacts}>
                                     <span>Contact me:</span>
-                                    <span><img src="linkedin.svg" alt="LinkedIn" /> willianpacheco31@gmail.com</span>
-                                    <span><img src="github.svg" alt="GitHub" /> github.com/pachecowillians</span>
-                                    <span><img src="gmail.svg" alt="Gmail" /> willianpacheco31@gmail.com</span>
-                                    <span><img src="portfolio.svg" alt="Portfolio" /> pachecowillians.github.io</span>
+                                    <a><img src="linkedin.svg" alt="LinkedIn" /> willianpacheco31@gmail.com</a>
+                                    <a><img src="github.svg" alt="GitHub" /> github.com/pachecowillians</a>
+                                    <a><img src="gmail.svg" alt="Gmail" /> willianpacheco31@gmail.com</a>
+                                    <a><img src="portfolio.svg" alt="Portfolio" /> pachecowillians.github.io</a>
                                 </div>
                             </div>
 

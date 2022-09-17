@@ -71,6 +71,9 @@
     text-align: justify;
     padding: 0 1.5rem;
     color: #FAFAFF;
+}
+
+.modalContainer * {
     user-select: text;
 }
 
@@ -109,6 +112,11 @@
 
 .contacts {
     align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    align-content: flex-start;
 }
 
 .contacts img {
@@ -116,16 +124,16 @@
     margin: 0.5rem 1rem;
 }
 
-.contacts span {
+.contacts a {
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
 .contacts span:first-child {
-    margin: 1rem 0;
+    margin: 0.5rem 0;
 }
 
-.contacts span:not(:first-child) {
+.contacts *:not(:first-child) {
     cursor: pointer;
 }
