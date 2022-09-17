@@ -2,7 +2,6 @@ import type { NextPage } from 'next'
 import { useState } from 'react';
 import KeyboardLetter from '../components/KeyboardLetter/KeyboardLetter'
 import MainLetter from '../components/MainLetter/MainLetter';
-import Modal from '../components/Modal/Modal';
 import styles from '../styles/Home.module.css'
 
 var letters = "QWERTYUIOPASDFGHJKLZXCVBNM";
@@ -55,25 +54,35 @@ const Home: NextPage = () => {
 
     return (
         <>
-            {opennedModal && <Modal setOpennedModal={setOpennedModal} />}
             <div className={styles.container}>
                 <div className={styles.gameArea}>
                     <header className={styles.header}>
                         <span>WPS TERMO</span>
-                        <span className="material-symbols-outlined" onClick={() => { setOpennedModal(true) }}>
-                            info
+                        <span className="material-symbols-outlined" onClick={() => { setOpennedModal(!opennedModal) }}>
+                            {!opennedModal ? 'info' : 'close'}
                         </span>
                     </header>
-                    <main className={styles.main}>
-                        <div className={styles.mainContainer}>
-                            {
-                                matrix.map(line => line.map((cell, key) => <MainLetter key={key} letter={cell.letter} status={cell.status} />))
-                            }
-                        </div>
-                    </main>
-                    <footer className={styles.footer}>
-                        {lettersArray.map((letter, key) => <KeyboardLetter key={key} letter={letter} status={lettersStatus[letter]} />)}
-                    </footer>
+                    {
+                        !opennedModal ? <>
+                            <main className={styles.main}>
+                                <div className={styles.mainContainer}>
+                                    {
+                                        matrix.map(line => line.map((cell, key) => <MainLetter key={key} letter={cell.letter} status={cell.status} />))
+                                    }
+                                </div>
+                            </main>
+                            <footer className={styles.footer}>
+                                {lettersArray.map((letter, key) => <KeyboardLetter key={key} letter={letter} status={lettersStatus[letter]} />)}
+                            </footer>
+                        </>
+                            : <div className={styles.modalContainer}>
+                                This game is a clone of the Termo game available on https://term.ooo/. In the game, your goal is find the correct word, and you have 6 chances to do it. In each try, will be shown the letters that exists in the word and the correct letters using the colors below.
+                                <div className={`${styles.color} ${styles.correct}`}>Correct</div>
+                                <div className={`${styles.color} ${styles.wrongPosition}`}>Wrong position</div>
+                                <div className={`${styles.color} ${styles.wrong}`}>Wrong</div>
+                            </div>
+
+                    }
                 </div>
             </div>
         </>
