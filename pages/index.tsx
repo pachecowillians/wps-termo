@@ -63,19 +63,21 @@ const Home: NextPage = () => {
                         </span>
                     </header>
                     {
-                        !opennedModal ? <>
-                            <main className={styles.main}>
-                                <div className={styles.mainContainer}>
-                                    {
-                                        matrix.map(line => line.map((cell, key) => <MainLetter key={key} letter={cell.letter} status={cell.status} />))
-                                    }
-                                </div>
-                            </main>
-                            <footer className={styles.footer}>
-                                {lettersArray.map((letter, key) => <KeyboardLetter key={key} letter={letter} status={lettersStatus[letter]} />)}
-                            </footer>
-                        </>
-                            : <>
+                        !opennedModal ?
+                            <>
+                                <main className={styles.main}>
+                                    <div className={styles.mainContainer}>
+                                        {
+                                            matrix.map(line => line.map((cell, key) => <MainLetter key={key} letter={cell.letter} status={cell.status} />))
+                                        }
+                                    </div>
+                                </main>
+                                <footer className={styles.footer}>
+                                    {lettersArray.map((letter, key) => <KeyboardLetter key={key} letter={letter} status={lettersStatus[letter]} />)}
+                                </footer>
+                            </>
+                            :
+                            <>
                                 <div className={styles.modalContainer}>
                                     <span> This game is a clone of the Termo game available on term.ooo. In the game, your goal is find the correct word, and you have 6 chances to do it. In each try, will be shown the letters that exists in the word and the correct letters using the colors below.</span>
                                     <div className={styles.colors}>
@@ -90,13 +92,11 @@ const Home: NextPage = () => {
                                         <a href='mailto:willianpacheco31@gmail.com' target='_blank'><img src="gmail.svg" alt="Gmail" /> willianpacheco31@gmail.com</a>
                                         <a href='https://pachecowillians.github.io' target='_blank'><img src="portfolio.svg" alt="Portfolio" /> pachecowillians.github.io</a>
                                     </div>
-
                                 </div>
                                 <div className={styles.modalFooter}>
                                     <span>&copy; {new Date().getFullYear()} - Willian Pacheco Silva</span>
                                 </div>
                             </>
-
                     }
                 </div>
             </div>
