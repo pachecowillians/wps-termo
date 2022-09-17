@@ -1,8 +1,7 @@
 import type { NextPage } from 'next'
-import { Fragment } from 'react';
 import KeyboardLetter from '../components/KeyboardLetter/KeyboardLetter'
 import MainLetter from '../components/MainLetter/MainLetter';
-import Modal from '../components/Modal/MainLetter';
+import Modal from '../components/Modal/Modal';
 import styles from '../styles/Home.module.css'
 
 var letters = "QWERTYUIOPASDFGHJKLZXCVBNM";
