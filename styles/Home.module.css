@@ -67,14 +67,24 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1rem;
     height: calc(100vh - 4rem);
     text-align: justify;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
     color: #FAFAFF;
+    align-content: center;
 }
 
 .modalContainer * {
     user-select: text;
+}
+
+.colors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    align-self: flex-start;
 }
 
 .color::before {
@@ -137,4 +147,38 @@
 
 .contacts *:not(:first-child) {
     cursor: pointer;
+}
+
+
+@media screen and (min-width: 400px) {
+    .contacts img {
+        width: 1.5rem;
+    }
+    .color::before {
+        width: 1.5rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        aspect-ratio: 1;
+    }
+    .modalContainer {
+        padding: 0 1.5rem;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .modalContainer {
+        padding: 0 10vw;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .modalContainer {
+        padding: 0 15vw;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .modalContainer {
+        padding: 0 20vw;
+    }
 }

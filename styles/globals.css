@@ -4,7 +4,7 @@ body {
   margin: 0;
   font-family: 'Mitr', sans-serif;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 a {
@@ -15,6 +15,12 @@ a {
 * {
   box-sizing: border-box;
   user-select: none;
+}
+
+@media screen and (min-width: 300px) {
+  html {
+    font-size: 16px;
+  }
 }
 
 @media screen and (min-width: 400px) {

@@ -77,9 +77,11 @@ const Home: NextPage = () => {
                         </>
                             : <div className={styles.modalContainer}>
                                 <span> This game is a clone of the Termo game available on term.ooo. In the game, your goal is find the correct word, and you have 6 chances to do it. In each try, will be shown the letters that exists in the word and the correct letters using the colors below.</span>
-                                <div className={`${styles.color} ${styles.correct}`}>Correct</div>
-                                <div className={`${styles.color} ${styles.wrongPosition}`}>Wrong position</div>
-                                <div className={`${styles.color} ${styles.wrong}`}>Wrong</div>
+                                <div className={styles.colors}>
+                                    <div className={`${styles.color} ${styles.correct}`}>Correct</div>
+                                    <div className={`${styles.color} ${styles.wrongPosition}`}>Wrong position</div>
+                                    <div className={`${styles.color} ${styles.wrong}`}>Wrong</div>
+                                </div>
                                 <div className={styles.contacts}>
                                     <span>Contact me:</span>
                                     <a href='https://www.linkedin.com/in/pachecowillians' target='_blank'><img src="linkedin.svg" alt="LinkedIn" /> linkedin.com/in/pachecowillians</a>
