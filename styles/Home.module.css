@@ -106,3 +106,26 @@
 .wrong::before {
     background-color: #312a2c;
 }
+
+.contacts {
+    align-self: flex-start;
+}
+
+.contacts img {
+    width: 2rem;
+    margin: 0.5rem 1rem;
+}
+
+.contacts span {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.contacts span:first-child {
+    margin: 1rem 0;
+}
+
+.contacts span:not(:first-child) {
+    cursor: pointer;
+}
