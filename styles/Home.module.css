@@ -29,6 +29,7 @@
     right: 1rem;
     font-size: 1.3rem;
     font-weight: 700;
+    z-index: 1;
 }
 
 .footer {
