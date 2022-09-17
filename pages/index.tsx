@@ -27,15 +27,18 @@ var activeColumn = 1;
 for (var i = 0; i < 6; i++) {
     matrix[i] = [];
     for (var j = 0; j < 5; j++) {
-        matrix[i][j] = { letter: '', status: 'inactive' };
+        if (i == activeLine) {
+            if (j == 0) {
+                matrix[i][j] = { letter: '', status: 'selected' };
+            } else {
+                matrix[i][j] = { letter: '', status: 'active' };
+            }
+        } else {
+            matrix[i][j] = { letter: '', status: 'inactive' };
+
+        }
     }
 }
-
-matrix[0][0] = { letter: 'A', status: 'active' }
-matrix[0][1] = { letter: 'U', status: 'selected' }
-matrix[0][2] = { letter: 'R', status: 'correct' }
-matrix[0][3] = { letter: 'E', status: 'wrongPosition' }
-matrix[0][4] = { letter: 'O', status: 'wrong' }
 
 var lettersStatus: keyboardLetterType = {}
 
@@ -48,13 +51,18 @@ lettersStatus['R'] = 'correct';
 lettersStatus['E'] = 'wrongPosition';
 lettersStatus['O'] = 'wrong';
 
+function handleKeyDown(letter: string) {
+    matrix[activeLine][activeColumn].letter = letter;
+    console.log(letter)
+}
+
 const Home: NextPage = () => {
 
     const [opennedModal, setOpennedModal] = useState(false);
 
     return (
         <>
-            <div className={styles.container}>
+            <div className={styles.container} tabIndex={0} onKeyDown={(e) => { handleKeyDown(e.key) }} >
                 <div className={styles.gameArea}>
                     <header className={styles.header}>
                         <span>WPS TERMO</span>
