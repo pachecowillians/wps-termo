@@ -121,13 +121,14 @@
 
 .contacts img {
     width: 2rem;
-    margin: 0.5rem 1rem;
+    margin: 0.5rem 0;
 }
 
 .contacts a {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    gap: 1rem;
 }
 
 .contacts span:first-child {
