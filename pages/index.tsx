@@ -53,22 +53,15 @@ const Home: NextPage = () => {
                             return {
                                 ...cell,
                                 letter: letter,
-                                status: 'active'
-                            }
-                        } else if (cell.position.line == activeLine && cell.position.column == activeColumn + 1) {
-                            return {
-                                ...cell,
-                                status: 'selected'
                             }
                         } else {
-
-                            return cell
+                            return cell;
                         }
                     })
                 )
             )
             setActiveColumn(prevActiveColumn => prevActiveColumn + 1)
-        } else if (letter == 'Backspace') {
+        } else if (letter == 'Backspace' && activeColumn > 0) {
             setMatrix(prevMatrix =>
                 prevMatrix.map(line => line.map(
                     cell => {
@@ -76,16 +69,9 @@ const Home: NextPage = () => {
                             return {
                                 ...cell,
                                 letter: '',
-                                status: 'selected'
-                            }
-                        } else if (cell.position.line == activeLine && cell.position.column == activeColumn) {
-                            return {
-                                ...cell,
-                                status: 'active'
                             }
                         } else {
-
-                            return cell
+                            return cell;
                         }
                     })
                 )
@@ -143,6 +129,31 @@ const Home: NextPage = () => {
     useEffect(() => {
         setMatrix(baseMatrix);
     }, [])
+
+    useEffect(() => {
+        setMatrix(prevMatrix =>
+            prevMatrix.map(line => line.map(
+                cell => {
+                    if (cell.position.line == activeLine && cell.position.column == activeColumn) {
+                        return {
+                            ...cell,
+                            status: 'selected'
+                        }
+                    } else if (cell.position.line == activeLine) {
+                        return {
+                            ...cell,
+                            status: 'active'
+                        }
+                    } else {
+                        return {
+                            ...cell,
+                            status: 'inactive'
+                        }
+                    }
+                })
+            )
+        )
+    }, [activeColumn])
 
     return (
         <>
