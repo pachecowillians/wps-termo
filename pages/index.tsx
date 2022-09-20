@@ -45,7 +45,7 @@ const Home: NextPage = () => {
     }
 
     function handleKeyDown(letter: string) {
-        if (isLetter(letter)) {
+        if (isLetter(letter) && activeColumn < 5) {
             setMatrix(prevMatrix =>
                 prevMatrix.map(line => line.map(
                     cell => {
@@ -67,10 +67,7 @@ const Home: NextPage = () => {
                     })
                 )
             )
-            setActiveColumn(prevActiveLine =>
-                (prevActiveLine + 1) < 5 ?
-                    prevActiveLine + 1 :
-                    prevActiveLine)
+            setActiveColumn(prevActiveColumn => prevActiveColumn + 1)
         }
     }
 
