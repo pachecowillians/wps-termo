@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import KeyboardLetter from '../components/KeyboardLetter/KeyboardLetter'
 import MainLetter from '../components/MainLetter/MainLetter';
 import styles from '../styles/Home.module.css'
@@ -10,34 +10,19 @@ var lettersArray = letters.split('');
 lettersArray.splice(lettersArray.findIndex(letter => letter == 'L') + 1, 0, 'backspace');
 lettersArray.splice(lettersArray.findIndex(letter => letter == 'M') + 1, 0, 'enter');
 
+interface matrixPositionType {
+    line: number;
+    column: number;
+}
+
 interface matrixCellType {
     letter: string;
     status: 'active' | 'inactive' | 'selected' | 'correct' | 'wrongPosition' | 'wrong';
+    position: matrixPositionType;
 }
 
 interface keyboardLetterType {
     [key: string]: 'active' | 'correct' | 'wrongPosition' | 'wrong';
-}
-
-var matrix: matrixCellType[][] = [];
-
-var activeLine = 0;
-var activeColumn = 1;
-
-for (var i = 0; i < 6; i++) {
-    matrix[i] = [];
-    for (var j = 0; j < 5; j++) {
-        if (i == activeLine) {
-            if (j == 0) {
-                matrix[i][j] = { letter: '', status: 'selected' };
-            } else {
-                matrix[i][j] = { letter: '', status: 'active' };
-            }
-        } else {
-            matrix[i][j] = { letter: '', status: 'inactive' };
-
-        }
-    }
 }
 
 var lettersStatus: keyboardLetterType = {}
@@ -51,14 +36,72 @@ lettersStatus['R'] = 'correct';
 lettersStatus['E'] = 'wrongPosition';
 lettersStatus['O'] = 'wrong';
 
-function handleKeyDown(letter: string) {
-    matrix[activeLine][activeColumn].letter = letter;
-    console.log(letter)
-}
+
 
 const Home: NextPage = () => {
 
+    function handleKeyDown(letter: string) {
+        setMatrix(prevMatrix =>
+            prevMatrix.map(line => line.map(
+                cell => cell.position.line == activeLine && cell.position.column == activeColumn ?
+                    { ...cell, letter: letter } :
+                    cell))
+        )
+        setActiveColumn(prevActiveLine =>
+            (prevActiveLine + 1) < 5 ?
+                prevActiveLine + 1 :
+                prevActiveLine)
+    }
+
     const [opennedModal, setOpennedModal] = useState(false);
+
+    const [matrix, setMatrix] = useState<matrixCellType[][]>([]);
+
+    const [activeLine, setActiveLine] = useState(0);
+    const [activeColumn, setActiveColumn] = useState(0);
+
+    var baseMatrix: matrixCellType[][] = [];
+
+    for (var i = 0; i < 6; i++) {
+        baseMatrix[i] = [];
+        for (var j = 0; j < 5; j++) {
+            if (i == activeLine) {
+                if (j == 0) {
+                    baseMatrix[i][j] = {
+                        position: {
+                            line: i,
+                            column: j
+                        },
+                        letter: '',
+                        status: 'selected'
+                    };
+                } else {
+                    baseMatrix[i][j] = {
+                        position: {
+                            line: i,
+                            column: j
+                        },
+                        letter: '',
+                        status: 'active'
+                    };
+                }
+            } else {
+                baseMatrix[i][j] = {
+                    position: {
+                        line: i,
+                        column: j
+                    },
+                    letter: '',
+                    status: 'inactive'
+                };
+
+            }
+        }
+    }
+
+    useEffect(() => {
+        setMatrix(baseMatrix);
+    }, [])
 
     return (
         <>
