@@ -44,38 +44,29 @@ const Home: NextPage = () => {
         return letter.length === 1 && letter.match(/[a-z]/i);
     }
 
+    function updateLetter(activeLine: number, activeColumn: number, letter: string) {
+        setMatrix(prevMatrix =>
+            prevMatrix.map(line => line.map(
+                cell => {
+                    if (cell.position.line == activeLine && cell.position.column == activeColumn) {
+                        return {
+                            ...cell,
+                            letter: letter,
+                        }
+                    } else {
+                        return cell;
+                    }
+                })
+            )
+        )
+    }
+
     function handleKeyDown(letter: string) {
         if (isLetter(letter) && activeColumn < 5) {
-            setMatrix(prevMatrix =>
-                prevMatrix.map(line => line.map(
-                    cell => {
-                        if (cell.position.line == activeLine && cell.position.column == activeColumn) {
-                            return {
-                                ...cell,
-                                letter: letter,
-                            }
-                        } else {
-                            return cell;
-                        }
-                    })
-                )
-            )
+            updateLetter(activeLine, activeColumn, letter);
             setActiveColumn(prevActiveColumn => prevActiveColumn + 1)
         } else if (letter == 'Backspace' && activeColumn > 0) {
-            setMatrix(prevMatrix =>
-                prevMatrix.map(line => line.map(
-                    cell => {
-                        if (cell.position.line == activeLine && cell.position.column == activeColumn - 1) {
-                            return {
-                                ...cell,
-                                letter: '',
-                            }
-                        } else {
-                            return cell;
-                        }
-                    })
-                )
-            )
+            updateLetter(activeLine, activeColumn - 1, '');
             setActiveColumn(prevActiveColumn => prevActiveColumn - 1)
         }
     }
@@ -171,7 +162,7 @@ const Home: NextPage = () => {
                                 <main className={styles.main}>
                                     <div className={styles.mainContainer}>
                                         {
-                                            matrix.map(line => line.map((cell, key) => <MatrixLetter key={key} letter={cell.letter} status={cell.status} />))
+                                            matrix.map(line => line.map((cell, key) => <MatrixLetter key={key} letter={cell.letter} status={cell.status} position={cell.position} />))
                                         }
                                     </div>
                                 </main>
