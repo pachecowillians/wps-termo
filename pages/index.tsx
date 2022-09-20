@@ -48,9 +48,24 @@ const Home: NextPage = () => {
         if (isLetter(letter)) {
             setMatrix(prevMatrix =>
                 prevMatrix.map(line => line.map(
-                    cell => cell.position.line == activeLine && cell.position.column == activeColumn ?
-                        { ...cell, letter: letter } :
-                        cell))
+                    cell => {
+                        if (cell.position.line == activeLine && cell.position.column == activeColumn) {
+                            return {
+                                ...cell,
+                                letter: letter,
+                                status: 'active'
+                            }
+                        } else if (cell.position.line == activeLine && cell.position.column == activeColumn + 1) {
+                            return {
+                                ...cell,
+                                status: 'selected'
+                            }
+                        } else {
+
+                            return cell
+                        }
+                    })
+                )
             )
             setActiveColumn(prevActiveLine =>
                 (prevActiveLine + 1) < 5 ?
