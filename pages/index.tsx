@@ -68,6 +68,29 @@ const Home: NextPage = () => {
                 )
             )
             setActiveColumn(prevActiveColumn => prevActiveColumn + 1)
+        } else if (letter == 'Backspace') {
+            setMatrix(prevMatrix =>
+                prevMatrix.map(line => line.map(
+                    cell => {
+                        if (cell.position.line == activeLine && cell.position.column == activeColumn - 1) {
+                            return {
+                                ...cell,
+                                letter: '',
+                                status: 'selected'
+                            }
+                        } else if (cell.position.line == activeLine && cell.position.column == activeColumn) {
+                            return {
+                                ...cell,
+                                status: 'active'
+                            }
+                        } else {
+
+                            return cell
+                        }
+                    })
+                )
+            )
+            setActiveColumn(prevActiveColumn => prevActiveColumn - 1)
         }
     }
 
