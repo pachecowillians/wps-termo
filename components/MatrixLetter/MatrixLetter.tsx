@@ -1,11 +1,11 @@
 import styles from "./styles.module.css"
 
-interface MainLetterProps {
+interface MatrixLetterProps {
     letter: string;
     status: 'active' | 'inactive' | 'selected' | 'correct' | 'wrongPosition' | 'wrong';
 }
 
-export default function MainLetter({ letter, status }: MainLetterProps) {
+export default function MatrixLetter({ letter, status }: MatrixLetterProps) {
     return <div className={`${styles.container} 
                             ${status == 'inactive' && styles.disabled} 
                             ${status == 'selected' && styles.selected} 

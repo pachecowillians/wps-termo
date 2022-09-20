@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react';
 import KeyboardLetter from '../components/KeyboardLetter/KeyboardLetter'
-import MainLetter from '../components/MainLetter/MainLetter';
+import MatrixLetter from '../components/MatrixLetter/MatrixLetter';
 import styles from '../styles/Home.module.css'
 
 var letters = "QWERTYUIOPASDFGHJKLZXCVBNM";
@@ -171,7 +171,7 @@ const Home: NextPage = () => {
                                 <main className={styles.main}>
                                     <div className={styles.mainContainer}>
                                         {
-                                            matrix.map(line => line.map((cell, key) => <MainLetter key={key} letter={cell.letter} status={cell.status} />))
+                                            matrix.map(line => line.map((cell, key) => <MatrixLetter key={key} letter={cell.letter} status={cell.status} />))
                                         }
                                     </div>
                                 </main>
