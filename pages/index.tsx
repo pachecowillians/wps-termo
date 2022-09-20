@@ -68,6 +68,10 @@ const Home: NextPage = () => {
         } else if (letter == 'Backspace' && activeColumn > 0) {
             updateLetter(activeLine, activeColumn - 1, '');
             setActiveColumn(prevActiveColumn => prevActiveColumn - 1)
+        } else if (letter == 'ArrowLeft' && activeColumn > 0) {
+            setActiveColumn(prevActiveColumn => prevActiveColumn - 1)
+        } else if (letter == 'ArrowRight' && activeColumn < 4) {
+            setActiveColumn(prevActiveColumn => prevActiveColumn + 1)
         }
     }
 
