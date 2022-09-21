@@ -70,25 +70,32 @@ const Home: NextPage = () => {
         )
     }
 
-    function handleKeyDown(letter: string) {
-        if (isLetter(letter) && activeColumn < 5) {
-            updateLetter(activeLine, activeColumn, letter);
-            setActiveColumn(prevActiveColumn => prevActiveColumn + 1)
-        } else if (letter == 'Backspace' && activeColumn > -1) {
-            if (activeColumn < 5) {
-                if (matrix[activeLine][activeColumn].letter == '') {
-                    updateLetter(activeLine, activeColumn - 1, '');
-                    if (activeColumn > 0) {
-                        setActiveColumn(prevActiveColumn => prevActiveColumn - 1)
-                    }
-                } else {
-                    updateLetter(activeLine, activeColumn, '');
+    function writeLetter(letter: string) {
+        updateLetter(activeLine, activeColumn, letter);
+        setActiveColumn(prevActiveColumn => prevActiveColumn + 1)
+    }
+
+    function eraseLetter() {
+        if (activeColumn < 5) {
+            if (matrix[activeLine][activeColumn].letter == '') {
+                updateLetter(activeLine, activeColumn - 1, '');
+                if (activeColumn > 0) {
+                    setActiveColumn(prevActiveColumn => prevActiveColumn - 1)
                 }
             } else {
-                updateLetter(activeLine, activeColumn - 1, '');
-                setActiveColumn(prevActiveColumn => prevActiveColumn - 1);
+                updateLetter(activeLine, activeColumn, '');
             }
+        } else {
+            updateLetter(activeLine, activeColumn - 1, '');
+            setActiveColumn(prevActiveColumn => prevActiveColumn - 1);
+        }
+    }
 
+    function handleKeyDown(letter: string) {
+        if (isLetter(letter) && activeColumn < 5) {
+            writeLetter(letter);
+        } else if (letter == 'Backspace' && activeColumn > -1) {
+            eraseLetter();
         } else if (letter == 'ArrowLeft' && activeColumn > 0) {
             setActiveColumn(prevActiveColumn => prevActiveColumn - 1)
         } else if (letter == 'ArrowRight' && activeColumn < 4) {
@@ -184,12 +191,22 @@ const Home: NextPage = () => {
                                 <main className={styles.main}>
                                     <div className={styles.mainContainer}>
                                         {
-                                            matrix.map(line => line.map((cell, key) => <MatrixLetter key={key} letter={cell.letter} status={cell.status} position={cell.position} setActiveColumn={setActiveColumn} />))
+                                            matrix.map(line => line.map((cell, key) => <MatrixLetter
+                                                key={key}
+                                                letter={cell.letter}
+                                                status={cell.status}
+                                                position={cell.position}
+                                                setActiveColumn={setActiveColumn} />))
                                         }
                                     </div>
                                 </main>
                                 <footer className={styles.footer}>
-                                    {lettersArray.map((letter, key) => <KeyboardLetter key={key} letter={letter} status={lettersStatus[letter]} />)}
+                                    {lettersArray.map((letter, key) => <KeyboardLetter
+                                        key={key}
+                                        letter={letter}
+                                        status={lettersStatus[letter]}
+                                        writeLetter={writeLetter}
+                                        eraseLetter={eraseLetter} />)}
                                 </footer>
                             </>
                             :
