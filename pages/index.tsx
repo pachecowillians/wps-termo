@@ -40,7 +40,21 @@ const Home: NextPage = () => {
 
     const [lettersStatus, setLettersStatus] = useState<keyboardLetterType>({});
 
-    const [word, setWord] = useState('blind');
+    const [validWords, setValidWords] = useState<string[]>([
+        'blind',
+        'blank',
+        'black',
+        'drink',
+        'crowd',
+        'fruit',
+        'adult',
+        'admit',
+        'alive',
+        'after',
+        'other'
+    ]);
+
+    const [word, setWord] = useState('');
 
     const [gameOver, setGameOver] = useState(false);
     const [win, setWin] = useState(false);
@@ -227,6 +241,10 @@ const Home: NextPage = () => {
         }
     }
 
+    function setRandomWord() {
+        setWord(validWords[Math.floor((Math.random() * validWords.length))])
+    }
+
     function playAgain() {
         setMatrix(createBaseMatrix())
         setActiveLine(0);
@@ -235,6 +253,7 @@ const Home: NextPage = () => {
         setGameOver(false);
         setWin(false);
         focusOnGame();
+        setRandomWord();
     }
 
     useEffect(() => {
@@ -276,6 +295,7 @@ const Home: NextPage = () => {
         setMatrix(createBaseMatrix());
         setLettersStatus(createBaseLettersStatus());
         focusOnGame();
+        setRandomWord();
     }, []);
 
     return (
