@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import Alert from '../components/Alert/Alert';
 import GameOverModal from '../components/GameOverModal/GameOverModal';
@@ -160,10 +161,10 @@ const Home: NextPage = () => {
                         setGameOver(true);
                         setWin(false);
                     }
-                }else{
+                } else {
                     setAlertMessage('The word does not exists')
                 }
-                
+
             } else {
                 setAlertMessage('The word must have 5 letters')
             }
@@ -363,10 +364,10 @@ const Home: NextPage = () => {
                                     </div>
                                     <div className={styles.contacts}>
                                         <span>Contact me:</span>
-                                        <a href='https://www.linkedin.com/in/pachecowillians' target='_blank'><img src="linkedin.svg" alt="LinkedIn" /> linkedin.com/in/pachecowillians</a>
-                                        <a href='https://github.com/pachecowillians' target='_blank'><img src="github.svg" alt="GitHub" /> github.com/pachecowillians</a>
-                                        <a href='mailto:willianpacheco31@gmail.com' target='_blank'><img src="gmail.svg" alt="Gmail" /> willianpacheco31@gmail.com</a>
-                                        <a href='https://pachecowillians.github.io' target='_blank'><img src="portfolio.svg" alt="Portfolio" /> pachecowillians.github.io</a>
+                                        <a href='https://www.linkedin.com/in/pachecowillians' target='_blank' rel="noreferrer"><Image src="linkedin.svg" alt="LinkedIn" /> linkedin.com/in/pachecowillians</a>
+                                        <a href='https://github.com/pachecowillians' target='_blank' rel="noreferrer"><Image src="github.svg" alt="GitHub" /> github.com/pachecowillians</a>
+                                        <a href='mailto:willianpacheco31@gmail.com' target='_blank' rel="noreferrer"><Image src="gmail.svg" alt="Gmail" /> willianpacheco31@gmail.com</a>
+                                        <a href='https://pachecowillians.github.io' target='_blank' rel="noreferrer"><Image src="portfolio.svg" alt="Portfolio" /> pachecowillians.github.io</a>
                                     </div>
                                 </div>
                                 <div className={styles.modalFooter}>
