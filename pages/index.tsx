@@ -238,7 +238,11 @@ const Home: NextPage = () => {
                                                 letter={cell.letter}
                                                 status={cell.status}
                                                 position={cell.position}
-                                                setActiveColumn={setActiveColumn} />))
+                                                setActiveColumn={(column: number) => {
+                                                    if (cell.position.line == activeLine) {
+                                                        setActiveColumn(column)
+                                                    }
+                                                }} />))
                                         }
                                     </div>
                                 </main>

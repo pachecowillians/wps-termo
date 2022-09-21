@@ -10,7 +10,7 @@ interface MatrixLetterProps {
     letter: string;
     status: 'active' | 'inactive' | 'selected' | 'correct' | 'wrongPosition' | 'wrong';
     position: matrixPositionType;
-    setActiveColumn: Dispatch<SetStateAction<number>>;
+    setActiveColumn: (column: number) => void;
 }
 
 export default function MatrixLetter({ letter, status, position, setActiveColumn }: MatrixLetterProps) {
