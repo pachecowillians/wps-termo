@@ -136,29 +136,34 @@ const Home: NextPage = () => {
             let wordToVerify = lineToVerify.map(letter => letter.letter).join('');
 
             if (wordToVerify.length == 5) {
-                lineToVerify.map(letter => {
-                    if (isLetter(letter.letter)) {
-                        if (letter.letter.toUpperCase() == word[letter.position.column].toUpperCase()) {
-                            updateStatus(letter, 'correct');
-                        } else if (word.toUpperCase().includes(letter.letter.toUpperCase())) {
-                            updateStatus(letter, 'wrongPosition');
-                        } else {
-                            updateStatus(letter, 'wrong');
+                if (validWords.includes(wordToVerify.toLowerCase())) {
+                    lineToVerify.map(letter => {
+                        if (isLetter(letter.letter)) {
+                            if (letter.letter.toUpperCase() == word[letter.position.column].toUpperCase()) {
+                                updateStatus(letter, 'correct');
+                            } else if (word.toUpperCase().includes(letter.letter.toUpperCase())) {
+                                updateStatus(letter, 'wrongPosition');
+                            } else {
+                                updateStatus(letter, 'wrong');
+                            }
                         }
+                    })
+                    if (wordToVerify.toUpperCase() == word.toUpperCase()) {
+                        setGameOver(true);
+                        setWin(true);
+                    } else if (activeLine < 5) {
+                        setActiveLine(prevActiveLine => prevActiveLine + 1);
+                        setActiveColumn(0);
+                    } else {
+                        setActiveLine(prevActiveLine => prevActiveLine + 1);
+                        setActiveColumn(0);
+                        setGameOver(true);
+                        setWin(false);
                     }
-                })
-                if (wordToVerify.toUpperCase() == word.toUpperCase()) {
-                    setGameOver(true);
-                    setWin(true);
-                } else if (activeLine < 5) {
-                    setActiveLine(prevActiveLine => prevActiveLine + 1);
-                    setActiveColumn(0);
-                } else {
-                    setActiveLine(prevActiveLine => prevActiveLine + 1);
-                    setActiveColumn(0);
-                    setGameOver(true);
-                    setWin(false);
+                }else{
+                    setAlertMessage('The word does not exists')
                 }
+                
             } else {
                 setAlertMessage('The word must have 5 letters')
             }
