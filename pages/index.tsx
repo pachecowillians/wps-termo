@@ -113,6 +113,7 @@ const Home: NextPage = () => {
                 updateStatus(letter, 'correct');
             } else if (word.includes(letter.letter)) {
                 console.log("possui: ", letter);
+                updateStatus(letter, 'wrongPosition');
             } else {
                 console.log("não possui: ", letter);
             }
