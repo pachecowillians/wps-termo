@@ -212,6 +212,12 @@ const Home: NextPage = () => {
         return baseLettersStatus;
     }
 
+    function focusOnGame(){
+        if (mainDivRef.current) {
+            mainDivRef.current.focus();
+        }
+    }
+
     function playAgain() {
         setMatrix(createBaseMatrix())
         setActiveLine(0);
@@ -219,6 +225,7 @@ const Home: NextPage = () => {
         setLettersStatus(createBaseLettersStatus())
         setGameOver(false);
         setWin(false);
+        focusOnGame();
     }
 
     useEffect(() => {
@@ -249,14 +256,9 @@ const Home: NextPage = () => {
     }, [activeColumn, activeLine])
 
     useEffect(() => {
-
         setMatrix(createBaseMatrix());
-
         setLettersStatus(createBaseLettersStatus());
-
-        if (mainDivRef.current) {
-            mainDivRef.current.focus();
-        }
+        focusOnGame();
     }, []);
 
     return (
