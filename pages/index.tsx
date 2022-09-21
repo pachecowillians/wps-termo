@@ -38,6 +38,8 @@ const Home: NextPage = () => {
 
     const [lettersStatus, setLettersStatus] = useState<keyboardLetterType>({});
 
+    const [word, setWord] = useState('blind');
+
     function isLetter(letter: string) {
         return letter.length === 1 && letter.match(/[a-z]/i);
     }
@@ -80,6 +82,45 @@ const Home: NextPage = () => {
         }
     }
 
+    function updateStatus(cell: matrixCellType, status: 'active' | 'correct' | 'wrongPosition' | 'wrong') {
+        setLettersStatus(oldLettersStatus => {
+            return {
+                ...oldLettersStatus,
+                [cell.letter.toUpperCase()]: status
+            }
+        });
+        setMatrix(prevMatrix =>
+            prevMatrix.map(line => line.map(
+                letter => {
+                    if (letter.position.line == cell.position.line && letter.position.column == cell.position.column) {
+                        return {
+                            ...letter,
+                            status: status
+                        }
+                    } else {
+                        return letter;
+                    }
+                })
+            )
+        )
+    }
+
+    function validateWord(lineToVerify: matrixCellType[]) {
+
+        lineToVerify.map(letter => {
+            if (letter.letter.toLowerCase() == word[letter.position.column].toLowerCase()) {
+                console.log("igual: ", letter);
+                updateStatus(letter, 'correct');
+            } else if (word.includes(letter.letter)) {
+                console.log("possui: ", letter);
+            } else {
+                console.log("não possui: ", letter);
+            }
+        })
+
+
+    }
+
     function handleKeyDown(letter: string) {
         if (isLetter(letter) && activeColumn < 5) {
             writeLetter(letter);
@@ -89,8 +130,13 @@ const Home: NextPage = () => {
             setActiveColumn(prevActiveColumn => prevActiveColumn - 1)
         } else if (letter == 'ArrowRight' && activeColumn < 4) {
             setActiveColumn(prevActiveColumn => prevActiveColumn + 1)
+        } else if (letter == 'Enter') {
+            let lineToVerify = matrix[activeLine];
+            validateWord(lineToVerify);
         }
     }
+
+
 
     useEffect(() => {
         setMatrix(prevMatrix =>
