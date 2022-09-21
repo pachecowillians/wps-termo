@@ -1,0 +1,67 @@
+.blurContainer {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15rem;
+    height: 10rem;
+    border-radius: 5px;
+    background-color: #3aa394;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    color: #FAFAFF;
+
+}
+
+.container h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.container span {
+    font-size: 0.7rem;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.buttons button {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    gap: 0.3rem;
+    font-family: 'Mitr', sans-serif;
+    border-radius: 5px;
+    background: transparent;
+    border: 2px solid #FAFAFF;
+    color: #FAFAFF;
+    cursor: pointer;
+    transition: all ease 0.2s;
+    font-weight: 500;
+}
+
+.buttons button:hover {
+    color: #3aa394;
+    background-color: #FAFAFF;
+}
+
+.buttons button span:last-child {
+    font-size: 0.9rem;
+}

@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import { useEffect, useRef, useState } from 'react';
+import GameOverModal from '../components/GameOverModal/GameOverModal';
 import KeyboardLetter from '../components/KeyboardLetter/KeyboardLetter'
 import MatrixLetter from '../components/MatrixLetter/MatrixLetter';
 import styles from '../styles/Home.module.css'
@@ -27,7 +28,7 @@ interface keyboardLetterType {
 
 const Home: NextPage = () => {
 
-    const [openedModal, setOpenedModal] = useState(false);
+    const [infoPage, setInfoPage] = useState(false);
 
     const [matrix, setMatrix] = useState<matrixCellType[][]>([]);
 
@@ -41,6 +42,7 @@ const Home: NextPage = () => {
     const [word, setWord] = useState('blind');
 
     const [gameOver, setGameOver] = useState(false);
+    const [win, setWin] = useState(false);
 
     function isLetter(letter: string) {
         return letter.length === 1 && letter.match(/[a-z]/i);
@@ -112,9 +114,12 @@ const Home: NextPage = () => {
     }
 
     function validateWord() {
+        console.log(gameOver, win)
         if (!gameOver) {
             let lineToVerify = matrix[activeLine];
-            console.log(lineToVerify)
+            let wordToVerify = lineToVerify.map(letter => letter.letter).join('');
+            console.log(wordToVerify)
+
             lineToVerify.map(letter => {
                 if (isLetter(letter.letter)) {
                     if (letter.letter.toUpperCase() == word[letter.position.column].toUpperCase()) {
@@ -126,13 +131,17 @@ const Home: NextPage = () => {
                     }
                 }
             })
-            if (activeLine < 5) {
+            if (wordToVerify.toUpperCase() == word.toUpperCase()) {
+                setGameOver(true);
+                setWin(true);
+            } else if (activeLine < 5) {
                 setActiveLine(prevActiveLine => prevActiveLine + 1);
                 setActiveColumn(0);
             } else {
                 setActiveLine(prevActiveLine => prevActiveLine + 1);
                 setActiveColumn(0);
                 setGameOver(true);
+                setWin(false);
             }
         }
     }
@@ -249,14 +258,15 @@ const Home: NextPage = () => {
                         <span>WPS TERMO</span>
                         <span className="material-symbols-outlined"
                             onClick={() => {
-                                setOpenedModal(!openedModal)
+                                setInfoPage(!infoPage)
                             }}>
-                            {!openedModal ? 'info' : 'close'}
+                            {!infoPage ? 'info' : 'close'}
                         </span>
                     </header>
                     {
-                        !openedModal ?
+                        !infoPage ?
                             <>
+                                {gameOver && <GameOverModal win={win} />}
                                 <main className={styles.main}>
                                     <div className={styles.mainContainer}>
                                         {
