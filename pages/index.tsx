@@ -106,21 +106,17 @@ const Home: NextPage = () => {
     }
 
     function validateWord(lineToVerify: matrixCellType[]) {
-
         lineToVerify.map(letter => {
-            if (letter.letter.toLowerCase() == word[letter.position.column].toLowerCase()) {
-                console.log("igual: ", letter);
-                updateStatus(letter, 'correct');
-            } else if (word.includes(letter.letter)) {
-                console.log("possui: ", letter);
-                updateStatus(letter, 'wrongPosition');
-            } else {
-                console.log("não possui: ", letter);
-                updateStatus(letter, 'wrong');
+            if (isLetter(letter.letter)) {
+                if (letter.letter.toLowerCase() == word[letter.position.column].toLowerCase()) {
+                    updateStatus(letter, 'correct');
+                } else if (word.includes(letter.letter)) {
+                    updateStatus(letter, 'wrongPosition');
+                } else {
+                    updateStatus(letter, 'wrong');
+                }
             }
         })
-
-
     }
 
     function handleKeyDown(letter: string) {
