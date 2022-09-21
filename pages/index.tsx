@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import KeyboardLetter from '../components/KeyboardLetter/KeyboardLetter'
 import MatrixLetter from '../components/MatrixLetter/MatrixLetter';
 import styles from '../styles/Home.module.css'
@@ -132,10 +132,6 @@ const Home: NextPage = () => {
     }
 
     useEffect(() => {
-        setMatrix(baseMatrix);
-    }, [])
-
-    useEffect(() => {
         setMatrix(prevMatrix =>
             prevMatrix.map(line => line.map(
                 cell => {
@@ -160,9 +156,18 @@ const Home: NextPage = () => {
         )
     }, [activeColumn])
 
+    const mainDivRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        setMatrix(baseMatrix);
+        if (mainDivRef.current) {
+            mainDivRef.current.focus();
+        }
+    }, []);
+
     return (
         <>
-            <div className={styles.container} tabIndex={0} onKeyDown={(e) => { handleKeyDown(e.key) }} >
+            <div className={styles.container} ref={mainDivRef} tabIndex={-1} onKeyDown={(e) => { handleKeyDown(e.key) }} >
                 <div className={styles.gameArea}>
                     <header className={styles.header}>
                         <span>WPS TERMO</span>
