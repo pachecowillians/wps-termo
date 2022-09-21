@@ -2,9 +2,10 @@ import styles from "./styles.module.css"
 
 interface gameOverModalProps {
     win: boolean;
+    word: string;
 }
 
-export default function GameOverModal({ win }: gameOverModalProps) {
+export default function GameOverModal({ win, word }: gameOverModalProps) {
 
     let containerClassNames = [styles.container]
     win && containerClassNames.push(styles.victory);
@@ -14,7 +15,7 @@ export default function GameOverModal({ win }: gameOverModalProps) {
         <div className={styles.blurContainer}>
             <div className={containerClassNames.join(' ')}>
                 <h1>{win ? 'VICTORY!' : 'FAILED!'}</h1>
-                <span>The word was BLIND</span>
+                <span>The word was {word}</span>
                 <div className={styles.buttons}>
                     <button type={"button"}>
                         <span>Play Again</span>

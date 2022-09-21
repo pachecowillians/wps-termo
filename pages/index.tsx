@@ -266,7 +266,7 @@ const Home: NextPage = () => {
                     {
                         !infoPage ?
                             <>
-                                {gameOver && <GameOverModal win={win} />}
+                                {gameOver && <GameOverModal win={win} word={word.toUpperCase()} />}
                                 <main className={styles.main}>
                                     <div className={styles.mainContainer}>
                                         {
