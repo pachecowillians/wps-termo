@@ -160,34 +160,7 @@ const Home: NextPage = () => {
         }
     }
 
-    useEffect(() => {
-        setMatrix(prevMatrix =>
-            prevMatrix.map(line => line.map(
-                cell => {
-                    if (cell.position.line == activeLine && cell.position.column == activeColumn) {
-                        return {
-                            ...cell,
-                            status: 'selected'
-                        }
-                    } else if (cell.position.line == activeLine) {
-                        return {
-                            ...cell,
-                            status: 'active'
-                        }
-                    } else if (cell.position.line > activeLine) {
-                        return {
-                            ...cell,
-                            status: 'inactive'
-                        }
-                    } else {
-                        return cell;
-                    }
-                })
-            )
-        )
-    }, [activeColumn, activeLine])
-
-    useEffect(() => {
+    function createBaseMatrix() {
         var baseMatrix: matrixCellType[][] = [];
 
         for (var i = 0; i < 6; i++) {
@@ -226,17 +199,60 @@ const Home: NextPage = () => {
                 }
             }
         }
+        return baseMatrix;
+    }
 
-        setMatrix(baseMatrix);
-
+    function createBaseLettersStatus() {
         var baseLettersStatus: keyboardLetterType = {}
 
         for (let i = 'A'.charCodeAt(0); i <= 'Z'.charCodeAt(0); i++) {
             var letter = String.fromCharCode(i);
             baseLettersStatus[letter] = 'active';
         }
+        return baseLettersStatus;
+    }
 
-        setLettersStatus(baseLettersStatus);
+    function playAgain() {
+        setMatrix(createBaseMatrix())
+        setActiveLine(0);
+        setActiveColumn(0);
+        setLettersStatus(createBaseLettersStatus())
+        setGameOver(false);
+        setWin(false);
+    }
+
+    useEffect(() => {
+        setMatrix(prevMatrix =>
+            prevMatrix.map(line => line.map(
+                cell => {
+                    if (cell.position.line == activeLine && cell.position.column == activeColumn) {
+                        return {
+                            ...cell,
+                            status: 'selected'
+                        }
+                    } else if (cell.position.line == activeLine) {
+                        return {
+                            ...cell,
+                            status: 'active'
+                        }
+                    } else if (cell.position.line > activeLine) {
+                        return {
+                            ...cell,
+                            status: 'inactive'
+                        }
+                    } else {
+                        return cell;
+                    }
+                })
+            )
+        )
+    }, [activeColumn, activeLine])
+
+    useEffect(() => {
+
+        setMatrix(createBaseMatrix());
+
+        setLettersStatus(createBaseLettersStatus());
 
         if (mainDivRef.current) {
             mainDivRef.current.focus();
@@ -264,7 +280,7 @@ const Home: NextPage = () => {
                     {
                         !infoPage ?
                             <>
-                                {gameOver && <GameOverModal win={win} word={word.toUpperCase()} />}
+                                {gameOver && <GameOverModal win={win} word={word.toUpperCase()} playAgain={playAgain} />}
                                 <main className={styles.main}>
                                     <div className={styles.mainContainer}>
                                         {
