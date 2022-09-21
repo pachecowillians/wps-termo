@@ -14,12 +14,15 @@ interface MatrixLetterProps {
 }
 
 export default function MatrixLetter({ letter, status, position, setActiveColumn }: MatrixLetterProps) {
-    return <div className={`${styles.container} 
-                            ${status == 'inactive' && styles.disabled} 
-                            ${status == 'selected' && styles.selected} 
-                            ${status == 'correct' && styles.correct} 
-                            ${status == 'wrongPosition' && styles.wrongPosition} 
-                            ${status == 'wrong' && styles.wrong}`}
+
+    let classNames = [styles.container];
+    status == 'inactive' && classNames.push(styles.disabled);
+    status == 'selected' && classNames.push(styles.selected);
+    status == 'correct' && classNames.push(styles.correct);
+    status == 'wrongPosition' && classNames.push(styles.wrongPosition);
+    status == 'wrong' && classNames.push(styles.wrong);
+
+    return <div className={classNames.join(' ')}
         onClick={() => {
             setActiveColumn(position.column);
         }}>
