@@ -117,6 +117,8 @@ const Home: NextPage = () => {
                 }
             }
         })
+        setActiveLine(prevActiveLine => prevActiveLine + 1);
+        setActiveColumn(0);
     }
 
     function handleKeyDown(letter: string) {
@@ -148,16 +150,18 @@ const Home: NextPage = () => {
                             ...cell,
                             status: 'active'
                         }
-                    } else {
+                    } else if (cell.position.line > activeLine) {
                         return {
                             ...cell,
                             status: 'inactive'
                         }
+                    } else {
+                        return cell;
                     }
                 })
             )
         )
-    }, [activeColumn])
+    }, [activeColumn, activeLine])
 
     useEffect(() => {
         var baseMatrix: matrixCellType[][] = [];
