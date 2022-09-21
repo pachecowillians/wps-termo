@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import { useEffect, useRef, useState } from 'react';
+import Alert from '../components/Alert/Alert';
 import GameOverModal from '../components/GameOverModal/GameOverModal';
 import KeyboardLetter from '../components/KeyboardLetter/KeyboardLetter'
 import MatrixLetter from '../components/MatrixLetter/MatrixLetter';
@@ -43,6 +44,8 @@ const Home: NextPage = () => {
 
     const [gameOver, setGameOver] = useState(false);
     const [win, setWin] = useState(false);
+
+    const [alertMessage, setAlertMessage] = useState('');
 
     function isLetter(letter: string) {
         return letter.length === 1 && letter.match(/[a-z]/i);
@@ -118,28 +121,32 @@ const Home: NextPage = () => {
             let lineToVerify = matrix[activeLine];
             let wordToVerify = lineToVerify.map(letter => letter.letter).join('');
 
-            lineToVerify.map(letter => {
-                if (isLetter(letter.letter)) {
-                    if (letter.letter.toUpperCase() == word[letter.position.column].toUpperCase()) {
-                        updateStatus(letter, 'correct');
-                    } else if (word.toUpperCase().includes(letter.letter.toUpperCase())) {
-                        updateStatus(letter, 'wrongPosition');
-                    } else {
-                        updateStatus(letter, 'wrong');
+            if (wordToVerify.length == 5) {
+                lineToVerify.map(letter => {
+                    if (isLetter(letter.letter)) {
+                        if (letter.letter.toUpperCase() == word[letter.position.column].toUpperCase()) {
+                            updateStatus(letter, 'correct');
+                        } else if (word.toUpperCase().includes(letter.letter.toUpperCase())) {
+                            updateStatus(letter, 'wrongPosition');
+                        } else {
+                            updateStatus(letter, 'wrong');
+                        }
                     }
+                })
+                if (wordToVerify.toUpperCase() == word.toUpperCase()) {
+                    setGameOver(true);
+                    setWin(true);
+                } else if (activeLine < 5) {
+                    setActiveLine(prevActiveLine => prevActiveLine + 1);
+                    setActiveColumn(0);
+                } else {
+                    setActiveLine(prevActiveLine => prevActiveLine + 1);
+                    setActiveColumn(0);
+                    setGameOver(true);
+                    setWin(false);
                 }
-            })
-            if (wordToVerify.toUpperCase() == word.toUpperCase()) {
-                setGameOver(true);
-                setWin(true);
-            } else if (activeLine < 5) {
-                setActiveLine(prevActiveLine => prevActiveLine + 1);
-                setActiveColumn(0);
             } else {
-                setActiveLine(prevActiveLine => prevActiveLine + 1);
-                setActiveColumn(0);
-                setGameOver(true);
-                setWin(false);
+                setAlertMessage('The word must have 5 letters!')
             }
         }
     }
@@ -212,7 +219,7 @@ const Home: NextPage = () => {
         return baseLettersStatus;
     }
 
-    function focusOnGame(){
+    function focusOnGame() {
         if (mainDivRef.current) {
             mainDivRef.current.focus();
         }
@@ -256,6 +263,14 @@ const Home: NextPage = () => {
     }, [activeColumn, activeLine])
 
     useEffect(() => {
+        if (alertMessage.length > 0) {
+            setTimeout(() => {
+                setAlertMessage('');
+            }, 3000)
+        }
+    }, [alertMessage])
+
+    useEffect(() => {
         setMatrix(createBaseMatrix());
         setLettersStatus(createBaseLettersStatus());
         focusOnGame();
@@ -283,6 +298,7 @@ const Home: NextPage = () => {
                         !infoPage ?
                             <>
                                 {gameOver && <GameOverModal win={win} word={word.toUpperCase()} playAgain={playAgain} />}
+                                {alertMessage.length > 0 && <Alert alertMessage={alertMessage} />}
                                 <main className={styles.main}>
                                     <div className={styles.mainContainer}>
                                         {
