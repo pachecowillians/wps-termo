@@ -78,7 +78,9 @@ const Home: NextPage = () => {
             if (activeColumn < 5) {
                 if (matrix[activeLine][activeColumn].letter == '') {
                     updateLetter(activeLine, activeColumn - 1, '');
-                    setActiveColumn(prevActiveColumn => prevActiveColumn - 1)
+                    if (activeColumn > 0) {
+                        setActiveColumn(prevActiveColumn => prevActiveColumn - 1)
+                    }
                 } else {
                     updateLetter(activeLine, activeColumn, '');
                 }
