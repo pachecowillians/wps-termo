@@ -24,12 +24,6 @@ export default function GameOverModal({ win, word, playAgain }: gameOverModalPro
                             restart_alt
                         </span>
                     </button>
-                    <button type={"button"}>
-                        <span>Share</span>
-                        <span className="material-symbols-outlined">
-                            share
-                        </span>
-                    </button>
                 </div>
             </div>
         </div>
