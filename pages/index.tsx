@@ -114,11 +114,9 @@ const Home: NextPage = () => {
     }
 
     function validateWord() {
-        console.log(gameOver, win)
         if (!gameOver) {
             let lineToVerify = matrix[activeLine];
             let wordToVerify = lineToVerify.map(letter => letter.letter).join('');
-            console.log(wordToVerify)
 
             lineToVerify.map(letter => {
                 if (isLetter(letter.letter)) {
