@@ -116,6 +116,7 @@ const Home: NextPage = () => {
                 updateStatus(letter, 'wrongPosition');
             } else {
                 console.log("não possui: ", letter);
+                updateStatus(letter, 'wrong');
             }
         })
 
