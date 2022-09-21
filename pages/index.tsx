@@ -114,12 +114,12 @@ const Home: NextPage = () => {
     function validateWord() {
         if (!gameOver) {
             let lineToVerify = matrix[activeLine];
-
+            console.log(lineToVerify)
             lineToVerify.map(letter => {
                 if (isLetter(letter.letter)) {
-                    if (letter.letter.toLowerCase() == word[letter.position.column].toLowerCase()) {
+                    if (letter.letter.toUpperCase() == word[letter.position.column].toUpperCase()) {
                         updateStatus(letter, 'correct');
-                    } else if (word.includes(letter.letter)) {
+                    } else if (word.toUpperCase().includes(letter.letter.toUpperCase())) {
                         updateStatus(letter, 'wrongPosition');
                     } else {
                         updateStatus(letter, 'wrong');
@@ -140,7 +140,7 @@ const Home: NextPage = () => {
     function handleKeyDown(letter: string) {
         if (!gameOver) {
             if (isLetter(letter) && activeColumn < 5) {
-                writeLetter(letter);
+                writeLetter(letter.toUpperCase());
             } else if (letter == 'Backspace' && activeColumn > -1) {
                 eraseLetter();
             } else if (letter == 'ArrowLeft' && activeColumn > 0) {
