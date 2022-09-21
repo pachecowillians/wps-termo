@@ -27,7 +27,7 @@ interface keyboardLetterType {
 
 const Home: NextPage = () => {
 
-    const [opennedModal, setOpennedModal] = useState(false);
+    const [openedModal, setOpenedModal] = useState(false);
 
     const [matrix, setMatrix] = useState<matrixCellType[][]>([]);
 
@@ -249,13 +249,13 @@ const Home: NextPage = () => {
                         <span>WPS TERMO</span>
                         <span className="material-symbols-outlined"
                             onClick={() => {
-                                setOpennedModal(!opennedModal)
+                                setOpenedModal(!openedModal)
                             }}>
-                            {!opennedModal ? 'info' : 'close'}
+                            {!openedModal ? 'info' : 'close'}
                         </span>
                     </header>
                     {
-                        !opennedModal ?
+                        !openedModal ?
                             <>
                                 <main className={styles.main}>
                                     <div className={styles.mainContainer}>
