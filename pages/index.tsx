@@ -134,8 +134,6 @@ const Home: NextPage = () => {
         }
     }
 
-
-
     useEffect(() => {
         setMatrix(prevMatrix =>
             prevMatrix.map(line => line.map(
@@ -219,11 +217,19 @@ const Home: NextPage = () => {
 
     return (
         <>
-            <div className={styles.container} ref={mainDivRef} tabIndex={-1} onKeyDown={(e) => { handleKeyDown(e.key) }} >
+            <div className={styles.container}
+                ref={mainDivRef}
+                tabIndex={-1}
+                onKeyDown={(e) => {
+                    handleKeyDown(e.key)
+                }} >
                 <div className={styles.gameArea}>
                     <header className={styles.header}>
                         <span>WPS TERMO</span>
-                        <span className="material-symbols-outlined" onClick={() => { setOpennedModal(!opennedModal) }}>
+                        <span className="material-symbols-outlined"
+                            onClick={() => {
+                                setOpennedModal(!opennedModal)
+                            }}>
                             {!opennedModal ? 'info' : 'close'}
                         </span>
                     </header>
