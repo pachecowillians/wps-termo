@@ -40,6 +40,8 @@ const Home: NextPage = () => {
 
     const [word, setWord] = useState('blind');
 
+    const [gameOver, setGameOver] = useState(false);
+
     function isLetter(letter: string) {
         return letter.length === 1 && letter.match(/[a-z]/i);
     }
@@ -62,23 +64,27 @@ const Home: NextPage = () => {
     }
 
     function writeLetter(letter: string) {
-        updateLetter(activeLine, activeColumn, letter);
-        setActiveColumn(prevActiveColumn => prevActiveColumn + 1)
+        if (!gameOver) {
+            updateLetter(activeLine, activeColumn, letter);
+            setActiveColumn(prevActiveColumn => prevActiveColumn + 1)
+        }
     }
 
     function eraseLetter() {
-        if (activeColumn < 5) {
-            if (matrix[activeLine][activeColumn].letter == '') {
-                updateLetter(activeLine, activeColumn - 1, '');
-                if (activeColumn > 0) {
-                    setActiveColumn(prevActiveColumn => prevActiveColumn - 1)
+        if (!gameOver) {
+            if (activeColumn < 5) {
+                if (matrix[activeLine][activeColumn].letter == '') {
+                    updateLetter(activeLine, activeColumn - 1, '');
+                    if (activeColumn > 0) {
+                        setActiveColumn(prevActiveColumn => prevActiveColumn - 1)
+                    }
+                } else {
+                    updateLetter(activeLine, activeColumn, '');
                 }
             } else {
-                updateLetter(activeLine, activeColumn, '');
+                updateLetter(activeLine, activeColumn - 1, '');
+                setActiveColumn(prevActiveColumn => prevActiveColumn - 1);
             }
-        } else {
-            updateLetter(activeLine, activeColumn - 1, '');
-            setActiveColumn(prevActiveColumn => prevActiveColumn - 1);
         }
     }
 
@@ -105,34 +111,45 @@ const Home: NextPage = () => {
         )
     }
 
-    function validateWord(lineToVerify: matrixCellType[]) {
-        lineToVerify.map(letter => {
-            if (isLetter(letter.letter)) {
-                if (letter.letter.toLowerCase() == word[letter.position.column].toLowerCase()) {
-                    updateStatus(letter, 'correct');
-                } else if (word.includes(letter.letter)) {
-                    updateStatus(letter, 'wrongPosition');
-                } else {
-                    updateStatus(letter, 'wrong');
+    function validateWord() {
+        if (!gameOver) {
+            let lineToVerify = matrix[activeLine];
+
+            lineToVerify.map(letter => {
+                if (isLetter(letter.letter)) {
+                    if (letter.letter.toLowerCase() == word[letter.position.column].toLowerCase()) {
+                        updateStatus(letter, 'correct');
+                    } else if (word.includes(letter.letter)) {
+                        updateStatus(letter, 'wrongPosition');
+                    } else {
+                        updateStatus(letter, 'wrong');
+                    }
                 }
+            })
+            if (activeLine < 5) {
+                setActiveLine(prevActiveLine => prevActiveLine + 1);
+                setActiveColumn(0);
+            } else {
+                setActiveLine(prevActiveLine => prevActiveLine + 1);
+                setActiveColumn(0);
+                setGameOver(true);
             }
-        })
-        setActiveLine(prevActiveLine => prevActiveLine + 1);
-        setActiveColumn(0);
+        }
     }
 
     function handleKeyDown(letter: string) {
-        if (isLetter(letter) && activeColumn < 5) {
-            writeLetter(letter);
-        } else if (letter == 'Backspace' && activeColumn > -1) {
-            eraseLetter();
-        } else if (letter == 'ArrowLeft' && activeColumn > 0) {
-            setActiveColumn(prevActiveColumn => prevActiveColumn - 1)
-        } else if (letter == 'ArrowRight' && activeColumn < 4) {
-            setActiveColumn(prevActiveColumn => prevActiveColumn + 1)
-        } else if (letter == 'Enter') {
-            let lineToVerify = matrix[activeLine];
-            validateWord(lineToVerify);
+        if (!gameOver) {
+            if (isLetter(letter) && activeColumn < 5) {
+                writeLetter(letter);
+            } else if (letter == 'Backspace' && activeColumn > -1) {
+                eraseLetter();
+            } else if (letter == 'ArrowLeft' && activeColumn > 0) {
+                setActiveColumn(prevActiveColumn => prevActiveColumn - 1)
+            } else if (letter == 'ArrowRight' && activeColumn < 4) {
+                setActiveColumn(prevActiveColumn => prevActiveColumn + 1)
+            } else if (letter == 'Enter') {
+                validateWord();
+            }
         }
     }
 
@@ -262,7 +279,8 @@ const Home: NextPage = () => {
                                         letter={letter}
                                         status={lettersStatus[letter]}
                                         writeLetter={writeLetter}
-                                        eraseLetter={eraseLetter} />)}
+                                        eraseLetter={eraseLetter}
+                                        validateWord={validateWord} />)}
                                 </footer>
                             </>
                             :

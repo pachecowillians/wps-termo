@@ -5,9 +5,10 @@ interface KeyboardLetterProps {
     status: 'active' | 'correct' | 'wrongPosition' | 'wrong';
     writeLetter: (letter: string) => void;
     eraseLetter: () => void;
+    validateWord: () => void
 }
 
-export default function KeyboardLetter({ letter, status, writeLetter, eraseLetter }: KeyboardLetterProps) {
+export default function KeyboardLetter({ letter, status, writeLetter, eraseLetter, validateWord }: KeyboardLetterProps) {
     let classNames = [styles.container]
 
     if (letter == 'backspace') {
@@ -19,7 +20,8 @@ export default function KeyboardLetter({ letter, status, writeLetter, eraseLette
 
     } else if (letter == 'enter') {
         classNames.push(styles.enter)
-        return <div className={classNames.join(' ')}>
+        return <div className={classNames.join(' ')}
+            onClick={() => { validateWord() }}>
             <span>ENTER</span>
         </div>
     } else {
