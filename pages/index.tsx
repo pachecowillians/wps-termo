@@ -25,19 +25,6 @@ interface keyboardLetterType {
     [key: string]: 'active' | 'correct' | 'wrongPosition' | 'wrong';
 }
 
-var lettersStatus: keyboardLetterType = {}
-
-for (let i = 'A'.charCodeAt(0); i <= 'Z'.charCodeAt(0); i++) {
-    var letter = String.fromCharCode(i);
-    lettersStatus[letter] = 'active';
-}
-
-lettersStatus['R'] = 'correct';
-lettersStatus['E'] = 'wrongPosition';
-lettersStatus['O'] = 'wrong';
-
-
-
 const Home: NextPage = () => {
 
     const [opennedModal, setOpennedModal] = useState(false);
@@ -48,6 +35,8 @@ const Home: NextPage = () => {
     const [activeColumn, setActiveColumn] = useState(0);
 
     const mainDivRef = useRef<HTMLDivElement>(null);
+
+    const [lettersStatus, setLettersStatus] = useState<keyboardLetterType>({});
 
     function isLetter(letter: string) {
         return letter.length === 1 && letter.match(/[a-z]/i);
@@ -169,6 +158,15 @@ const Home: NextPage = () => {
         }
 
         setMatrix(baseMatrix);
+
+        var baseLettersStatus: keyboardLetterType = {}
+
+        for (let i = 'A'.charCodeAt(0); i <= 'Z'.charCodeAt(0); i++) {
+            var letter = String.fromCharCode(i);
+            baseLettersStatus[letter] = 'active';
+        }
+
+        setLettersStatus(baseLettersStatus);
 
         if (mainDivRef.current) {
             mainDivRef.current.focus();
