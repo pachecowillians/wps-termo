@@ -13,7 +13,6 @@
     width: 15rem;
     height: 10rem;
     border-radius: 5px;
-    background-color: #3aa394;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,4 +63,12 @@
 
 .buttons button span:last-child {
     font-size: 0.9rem;
+}
+
+.victory {
+    background-color: #3aa394;
+}
+
+.failed {
+    background-color: #db4b4b;
 }
