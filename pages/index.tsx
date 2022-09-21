@@ -40,6 +40,15 @@ lettersStatus['O'] = 'wrong';
 
 const Home: NextPage = () => {
 
+    const [opennedModal, setOpennedModal] = useState(false);
+
+    const [matrix, setMatrix] = useState<matrixCellType[][]>([]);
+
+    const [activeLine, setActiveLine] = useState(0);
+    const [activeColumn, setActiveColumn] = useState(0);
+
+    const mainDivRef = useRef<HTMLDivElement>(null);
+
     function isLetter(letter: string) {
         return letter.length === 1 && letter.match(/[a-z]/i);
     }
@@ -85,52 +94,6 @@ const Home: NextPage = () => {
         }
     }
 
-    const [opennedModal, setOpennedModal] = useState(false);
-
-    const [matrix, setMatrix] = useState<matrixCellType[][]>([]);
-
-    const [activeLine, setActiveLine] = useState(0);
-    const [activeColumn, setActiveColumn] = useState(0);
-
-    var baseMatrix: matrixCellType[][] = [];
-
-    for (var i = 0; i < 6; i++) {
-        baseMatrix[i] = [];
-        for (var j = 0; j < 5; j++) {
-            if (i == activeLine) {
-                if (j == 0) {
-                    baseMatrix[i][j] = {
-                        position: {
-                            line: i,
-                            column: j
-                        },
-                        letter: '',
-                        status: 'selected'
-                    };
-                } else {
-                    baseMatrix[i][j] = {
-                        position: {
-                            line: i,
-                            column: j
-                        },
-                        letter: '',
-                        status: 'active'
-                    };
-                }
-            } else {
-                baseMatrix[i][j] = {
-                    position: {
-                        line: i,
-                        column: j
-                    },
-                    letter: '',
-                    status: 'inactive'
-                };
-
-            }
-        }
-    }
-
     useEffect(() => {
         setMatrix(prevMatrix =>
             prevMatrix.map(line => line.map(
@@ -156,10 +119,48 @@ const Home: NextPage = () => {
         )
     }, [activeColumn])
 
-    const mainDivRef = useRef<HTMLDivElement>(null);
-
     useEffect(() => {
+        var baseMatrix: matrixCellType[][] = [];
+
+        for (var i = 0; i < 6; i++) {
+            baseMatrix[i] = [];
+            for (var j = 0; j < 5; j++) {
+                if (i == activeLine) {
+                    if (j == 0) {
+                        baseMatrix[i][j] = {
+                            position: {
+                                line: i,
+                                column: j
+                            },
+                            letter: '',
+                            status: 'selected'
+                        };
+                    } else {
+                        baseMatrix[i][j] = {
+                            position: {
+                                line: i,
+                                column: j
+                            },
+                            letter: '',
+                            status: 'active'
+                        };
+                    }
+                } else {
+                    baseMatrix[i][j] = {
+                        position: {
+                            line: i,
+                            column: j
+                        },
+                        letter: '',
+                        status: 'inactive'
+                    };
+
+                }
+            }
+        }
+
         setMatrix(baseMatrix);
+
         if (mainDivRef.current) {
             mainDivRef.current.focus();
         }
