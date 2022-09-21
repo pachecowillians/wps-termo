@@ -6,12 +6,6 @@ import KeyboardLetter from '../components/KeyboardLetter/KeyboardLetter'
 import MatrixLetter from '../components/MatrixLetter/MatrixLetter';
 import styles from '../styles/Home.module.css'
 
-var letters = "QWERTYUIOPASDFGHJKLZXCVBNM";
-var lettersArray = letters.split('');
-
-lettersArray.splice(lettersArray.findIndex(letter => letter == 'L') + 1, 0, 'backspace');
-lettersArray.splice(lettersArray.findIndex(letter => letter == 'M') + 1, 0, 'enter');
-
 interface matrixPositionType {
     line: number;
     column: number;
@@ -28,6 +22,12 @@ interface keyboardLetterType {
 }
 
 const Home: NextPage = () => {
+
+    var letters = "QWERTYUIOPASDFGHJKLZXCVBNM";
+    var lettersArray = letters.split('');
+
+    lettersArray.splice(lettersArray.findIndex(letter => letter == 'L') + 1, 0, 'backspace');
+    lettersArray.splice(lettersArray.findIndex(letter => letter == 'M') + 1, 0, 'enter');
 
     const [infoPage, setInfoPage] = useState(false);
 
@@ -163,7 +163,7 @@ const Home: NextPage = () => {
                 setActiveColumn(prevActiveColumn => prevActiveColumn + 1)
             } else if (letter == 'Enter') {
                 validateWord();
-            }else{
+            } else {
                 setAlertMessage('Invalid key pressed')
             }
         }
