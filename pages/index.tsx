@@ -5,6 +5,7 @@ import GameOverModal from '../components/GameOverModal/GameOverModal';
 import KeyboardLetter from '../components/KeyboardLetter/KeyboardLetter'
 import MatrixLetter from '../components/MatrixLetter/MatrixLetter';
 import styles from '../styles/Home.module.css'
+import axios from 'axios'
 
 interface matrixPositionType {
     line: number;
@@ -21,7 +22,15 @@ interface keyboardLetterType {
     [key: string]: 'active' | 'correct' | 'wrongPosition' | 'wrong';
 }
 
-const Home: NextPage = () => {
+interface validWordsType {
+    word: string;
+}
+
+interface nextPagePropsType {
+    baseValidWords: validWordsType[]
+}
+
+const Home: NextPage<nextPagePropsType> = ({ baseValidWords }) => {
 
     var letters = "QWERTYUIOPASDFGHJKLZXCVBNM";
     var lettersArray = letters.split('');
@@ -40,19 +49,7 @@ const Home: NextPage = () => {
 
     const [lettersStatus, setLettersStatus] = useState<keyboardLetterType>({});
 
-    const [validWords, setValidWords] = useState<string[]>([
-        'blind',
-        'blank',
-        'black',
-        'drink',
-        'crowd',
-        'fruit',
-        'adult',
-        'admit',
-        'alive',
-        'after',
-        'other'
-    ]);
+    const [validWords, setValidWords] = useState<validWordsType[]>([]);
 
     const [word, setWord] = useState('');
 
@@ -136,7 +133,7 @@ const Home: NextPage = () => {
             let wordToVerify = lineToVerify.map(letter => letter.letter).join('');
 
             if (wordToVerify.length == 5) {
-                if (validWords.includes(wordToVerify.toLowerCase())) {
+                if (validWords.some(({ word }) => word == wordToVerify.toLowerCase())) {
                     lineToVerify.map(letter => {
                         if (isLetter(letter.letter)) {
                             if (letter.letter.toUpperCase() == word[letter.position.column].toUpperCase()) {
@@ -247,7 +244,7 @@ const Home: NextPage = () => {
     }
 
     function setRandomWord() {
-        setWord(validWords[Math.floor((Math.random() * validWords.length))])
+        setWord(validWords[Math.floor((Math.random() * validWords.length))].word);
     }
 
     function playAgain() {
@@ -286,6 +283,7 @@ const Home: NextPage = () => {
                 })
             )
         )
+        console.log(word)
     }, [activeColumn, activeLine])
 
     useEffect(() => {
@@ -297,10 +295,17 @@ const Home: NextPage = () => {
     }, [alertMessage])
 
     useEffect(() => {
+        if (validWords.length > 0) {
+            setRandomWord();
+        }
+    }, [validWords])
+
+
+    useEffect(() => {
         setMatrix(createBaseMatrix());
         setLettersStatus(createBaseLettersStatus());
         focusOnGame();
-        setRandomWord();
+        setValidWords(baseValidWords)
     }, []);
 
     return (
@@ -380,4 +385,12 @@ const Home: NextPage = () => {
     )
 }
 
+Home.getInitialProps =
+    async function () {
+        const res = await axios.get('http://localhost:3000/api/words/')
+        const data = await res.data
+        return {
+            baseValidWords: data
+        }
+    }
 export default Home
