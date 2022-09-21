@@ -57,7 +57,6 @@
 }
 
 .buttons button:hover {
-    color: #3aa394;
     background-color: #FAFAFF;
 }
 
@@ -69,6 +68,14 @@
     background-color: #3aa394;
 }
 
+.victory .buttons button:hover{
+    color: #3aa394;
+}
+
 .failed {
     background-color: #db4b4b;
+}
+
+.failed .buttons button:hover{
+    color: #db4b4b;
 }
