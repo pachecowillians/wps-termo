@@ -26,11 +26,7 @@ interface validWordsType {
     word: string;
 }
 
-interface nextPagePropsType {
-    baseValidWords: validWordsType[]
-}
-
-const Home: NextPage<nextPagePropsType> = ({ baseValidWords }) => {
+const Home: NextPage = () => {
 
     var letters = "QWERTYUIOPASDFGHJKLZXCVBNM";
     var lettersArray = letters.split('');
@@ -300,12 +296,17 @@ const Home: NextPage<nextPagePropsType> = ({ baseValidWords }) => {
         }
     }, [validWords])
 
+    async function getWords() {
+        const res = await axios.get('/api/words/');
+        const words = await res.data;
+        setValidWords(words);
+    }
 
     useEffect(() => {
         setMatrix(createBaseMatrix());
         setLettersStatus(createBaseLettersStatus());
         focusOnGame();
-        setValidWords(baseValidWords)
+        getWords();
     }, []);
 
     return (
@@ -385,12 +386,4 @@ const Home: NextPage<nextPagePropsType> = ({ baseValidWords }) => {
     )
 }
 
-Home.getInitialProps =
-    async function () {
-        const res = await axios.get('http://localhost:3000/api/words/')
-        const data = await res.data
-        return {
-            baseValidWords: data
-        }
-    }
 export default Home
