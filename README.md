@@ -1,3 +1,13 @@
+<div align="center">
+    <br/>
+    <img src="./public/desktop.gif"/>
+    <img height="339px" src="./public/mobile.gif"/>
+    <br>
+</div>
+
+<br/>
+
+
 # WPS Termo
 
 To execute the game, run the development server:
