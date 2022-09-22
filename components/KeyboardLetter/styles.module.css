@@ -1,11 +1,11 @@
 .container {
-    background-color: #4C4347;
+    background-color: var(--keyboard-background);
     border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     grid-column: span 3;
-    color: #FAFAFF;
+    color: var(--text);
     font-size: 1rem;
     cursor: pointer;
 }
@@ -32,14 +32,14 @@
 }
 
 .correct {
-    background-color: #3aa394;
+    background-color: var(--green);
 }
 
 .wrongPosition {
-    background-color: #d3ad69;
+    background-color: var(--yellow);
 }
 
 .wrong {
-    background-color: #594B4F;
-    color: #6E5C62;
+    background-color: var(--keyboard-disabled);
+    color: var(--background);
 }

@@ -1,13 +1,13 @@
 .container {
     width: 15rem;
     border-radius: 5px;
-    background-color: #576bab;
+    background-color: var(--blue);
     align-self: center;
     display: flex;
     align-content: center;
     justify-content: center;
     align-items: center;
-    color: #FAFAFF;
+    color: var(--text);
     margin-top: 0.5rem;
 }
 

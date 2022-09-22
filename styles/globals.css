@@ -30,6 +30,18 @@ a {
     user-select: none;
 }
 
+:root {
+    --background: #6E5C62;
+    --keyboard-background: #4C4347;
+    --green: #3aa394;
+    --yellow: #d3ad69;
+    --red: #db4b4b;
+    --blue: #576bab;
+    --disabled-cell: #312a2c;
+    --keyboard-disabled: #594B4F;
+    --text: #FAFAFF;
+}
+
 @media screen and (min-width: 300px) {
     html {
         font-size: 16px;
