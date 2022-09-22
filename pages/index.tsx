@@ -175,8 +175,6 @@ const Home: NextPage = () => {
                 setActiveColumn(prevActiveColumn => prevActiveColumn + 1)
             } else if (letter == 'Enter') {
                 validateWord();
-            } else {
-                setAlertMessage('Invalid key pressed')
             }
         }
     }
