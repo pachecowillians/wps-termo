@@ -277,7 +277,6 @@ const Home: NextPage = () => {
                 })
             )
         )
-        console.log(word)
     }, [activeColumn, activeLine])
 
     useEffect(() => {
